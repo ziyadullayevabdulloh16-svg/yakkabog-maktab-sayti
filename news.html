@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maktab yangiliklari</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f6f9; }
+    h1 { text-align: center; color: #173b68; }
+    .news { max-width: 700px; margin: 20px auto; padding: 20px; background: white; border-radius: 12px; }
+    img { width: 100%; height: auto; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Yangiliklar</h1>
+  <div id="news">Yangiliklar yuklanmoqda...</div>
+
+  <script>
+    fetch('data/news.json')
+      .then(response => response.json())
+      .then(data => {
+        const items = Array.isArray(data) ? data : [data];
+        document.getElementById('news').innerHTML = items.map(item => `
+          <article class="news">
+            <h2>${item.title || ''}</h2>
+            <p>${item.date || ''}</p>
+            ${item.image ? `<img src="${item.image}" alt="Yangilik rasmi">` : ''}
+          </article>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('news').textContent = 'Yangiliklarni yuklashda xatolik yuz berdi.';
+      });
+  </script>
+</body>
+</html>
