@@ -1,0 +1,23 @@
+media: media
+
+content:
+  - name: news
+    label: Yangiliklar
+    type: file
+    path: data/news.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Sarlavha
+        type: string
+        required: true
+      - name: date
+        label: Sana
+        type: date
+      - name: image
+        label: Rasm
+        type: image
+      - name: body
+        label: Yangilik matni
+        type: rich-text
